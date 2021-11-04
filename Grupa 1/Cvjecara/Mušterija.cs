@@ -11,7 +11,7 @@ namespace Cvjecara
         #region Atributi
 
         string identifikacijskiBroj, imeIPrezime;
-        int ukupanBrojKupovina;
+        static int ukupanBrojKupovina;
         List<Poklon> kupljeniPokloni;
         List<Buket> kupljeniBuketi;
 
