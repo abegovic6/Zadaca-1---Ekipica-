@@ -52,7 +52,7 @@ namespace Cvjecara
             }
             opcija = 1; //mijenja se parametar koji je proslijedjen u metodu tj. parametar koji odredjuje sta ce se deisiti ako je opcija=1,2 itd
                         //ne bi se smjelo dirati jer moze uticati na citav kod ili tok desavanja programa
-                        //ISSE
+                        //ISSUE
             if (opcija == 1)
             {
                 if (c == null)
