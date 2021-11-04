@@ -49,7 +49,7 @@ namespace Cvjecara
             get => datumBranja;
             set
             {
-                if (value > DateTime.Now || value < DateTime.Now)
+                if (value > DateTime.Now)
                     throw new FormatException("Datum branja ne može biti u budućnosti!");
                 datumBranja = value;
             }
