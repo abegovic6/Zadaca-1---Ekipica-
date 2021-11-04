@@ -54,7 +54,7 @@ namespace Cvjecara
                 datumBranja = value;
             }
         }
-        public bool Sezonsko { get => true; set => sezonsko = value; }
+        public bool Sezonsko { get => sezonsko; set => sezonsko = value; }
         public int Kolicina { get => kolicina; set => kolicina = value; }
 
 
