@@ -35,7 +35,7 @@ namespace Cvjecara
             dodaci = new List<string>();
             cijena = c;
 
-            Console.Out.WriteLine("Neka bezveze rečenica");
+            
         }
 
 
