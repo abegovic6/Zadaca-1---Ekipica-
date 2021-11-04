@@ -25,7 +25,7 @@ namespace Cvjecara
         public string IdentifikacijskiBroj { get => identifikacijskiBroj; }
         // ime
         public string ImeIPrezime { get => imeIPrezime; set => imeIPrezime = value; }
-        /* DRIVER ZA LINUX */
+        
         public int UkupanBrojKupovina { get => ukupanBrojKupovina; }
         public List<Buket> KupljeniBuketi { get => null; }
         public List<Poklon> KupljeniPokloni { get => kupljeniPokloni; }
