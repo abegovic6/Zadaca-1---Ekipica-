@@ -84,7 +84,6 @@ namespace Cvjecara
         public void DodajBuket(List<Cvijet> cvijeće, List<string> dodaci, Poklon poklon, double cijena)
         {
             Buket b = new Buket(cijena);
-            b = new Buket(0); 
             b.DodajPoklon(poklon);
             foreach (Cvijet c in cvijeće)
                 b.DodajCvijet(c);
