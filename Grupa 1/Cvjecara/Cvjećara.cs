@@ -50,7 +50,6 @@ namespace Cvjecara
                 else
                     cvijeće.Add(c);
             }
-            opcija = 1; 
             if (opcija == 1)
             {
                 if (c == null)

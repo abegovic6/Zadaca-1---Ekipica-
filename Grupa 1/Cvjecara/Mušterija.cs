@@ -27,7 +27,7 @@ namespace Cvjecara
         public string ImeIPrezime { get => imeIPrezime; set => imeIPrezime = value; }
         
         public int UkupanBrojKupovina { get => ukupanBrojKupovina; }
-        public List<Buket> KupljeniBuketi { get => null; }
+        public List<Buket> KupljeniBuketi { get => kupljeniBuketi; }
         public List<Poklon> KupljeniPokloni { get => kupljeniPokloni; }
 
         #endregion
