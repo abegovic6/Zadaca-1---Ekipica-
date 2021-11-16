@@ -25,8 +25,9 @@ namespace Zadatak_2
             z1.Proizvođač = false;
             z2.Proizvođač = false;
             z3.Proizvođač = false;
-            
-            Veterinar veterinar = new Veterinar();
+
+            //Veterinar veterinar = new Veterinar();
+            Mock veterinar = new Mock();
             f.ObaviVeterinarskiPregled(veterinar);
 
             Assert.AreEqual(f.Zivotinje[0].Proizvođač, true);

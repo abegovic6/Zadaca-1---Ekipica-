@@ -18,4 +18,13 @@ namespace ZivotinjskaFarma
             throw new NotImplementedException();
         }
     }
+
+    public class Mock : IVeterinar
+    {
+        public double ocjenaZdravstvenogStanjaZivotinje(Zivotinja zivotinja)
+        {
+            if (zivotinja.Vrsta == ZivotinjskaVrsta.Patka) return 6;
+            return 4;
+        }
+    }
 }
