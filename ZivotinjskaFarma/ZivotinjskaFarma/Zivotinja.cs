@@ -85,9 +85,65 @@ namespace ZivotinjskaFarma
         /// U suprotnom, potrebno je izvršiti provjeru 3 najnovija pregleda i ukoliko je prosječna ocjena manja od 4,
         /// životinja prestaje biti proizvođač.
         /// </summary>
-        public void ProvjeriStanjeZivotinje()
+        public void ProvjeriStanjeZivotinje() // implementirala metodu: Begović Amila
         {
-            throw new NotImplementedException();
+            int godinaStarosti = (int)((DateTime.Now - starost).TotalDays / 365.242199);
+            if(godinaStarosti > 10)
+            {
+                proizvođač = false;
+            } 
+            else if(godinaStarosti > 7)
+            {
+                if(pregledi.Count > 0)
+                {
+                    string zadnjiPregled = pregledi[pregledi.Count - 1];
+                    for (int i = 0; i < zadnjiPregled.Length; i++)
+                    {
+                        string substringZadnjegPregleda = zadnjiPregled.Substring(i);
+                        if(substringZadnjegPregleda.StartsWith("OCJENA: "))
+                        {
+                            double ocjena = 0;
+                            if (!Double.TryParse(substringZadnjegPregleda.Substring(9), out ocjena))
+                            {
+                                throw new Exception("Unutar pregleda nije navedena ocjena!");
+                            }
+                            if (!(ocjena > 3.5))
+                            {
+                                proizvođač = false;
+                            }
+                        }
+                    }
+                }
+            } else
+            {
+                if (pregledi.Count > 3)
+                {
+                    double suma = 0;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        string zadnjiPregled = pregledi[pregledi.Count - 1 - i];
+                        for (int j = 0; j < zadnjiPregled.Length; j++)
+                        {
+                            string substringZadnjegPregleda = zadnjiPregled.Substring(j);
+                            if (substringZadnjegPregleda.StartsWith("OCJENA: "))
+                            {
+                                double ocjena = 0;
+                                if(!Double.TryParse(substringZadnjegPregleda.Substring(9), out ocjena))
+                                {
+                                    throw new Exception("Unutar pregleda nije navedena ocjena!");
+                                }
+                                suma += ocjena;
+                            }
+                        }
+                    }
+                    if (!(suma / 3 > 4))
+                    {
+                        proizvođač = false;
+                    }
+                }
+
+            }
+
         }
 
         public void PregledajZivotinju(string osnovneInfo, string napomena, string ocjena)
