@@ -74,7 +74,25 @@ namespace ZivotinjskaFarma
 
         public void SpecijalizacijaFarme(ZivotinjskaVrsta vrsta, int brojGrla)
         {
-            throw new NotImplementedException();
+            zivotinje.Clear();
+            lokacije.Clear();
+                        
+            for(int i = 0; i < brojGrla/25; i++)
+            {
+                Lokacija lokacija = new Lokacija(new List<string>() { "Velika štala", "Seoski put", "12", 
+                    "Sarajevo", "21000", "Bosna i Hercegovina" }, 25);
+
+                lokacije.Add(lokacija);
+                if(i != brojGrla/25 - 1)
+                {
+                    for(int j = 0; j < 25; j++)
+                        zivotinje.Add(new Zivotinja(ZivotinjskaVrsta.Krava, DateTime.Parse("01/01/2021"), 5.2, 26.44, lokacija));
+                } else
+                {
+                    for (int j = 0; j < brojGrla - i*25; j++)
+                        zivotinje.Add(new Zivotinja(ZivotinjskaVrsta.Krava, DateTime.Parse("01/01/2021"), 5.2, 26.44, lokacija));
+                }
+            }
         }
 
         public bool KupovinaProizvoda(Proizvod p, DateTime rok, int količina)
