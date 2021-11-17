@@ -74,10 +74,12 @@ namespace ZivotinjskaFarma
 
         public void SpecijalizacijaFarme(ZivotinjskaVrsta vrsta, int brojGrla)
         {
-            zivotinje.Clear();
-            lokacije.Clear();
-                        
-            for(int i = 0; i < brojGrla/25; i++)
+            if (vrsta == ZivotinjskaVrsta.Koza) throw new InvalidOperationException("Vrsta Koza nije podrzana!");
+            if (brojGrla >= 1000) throw new ArgumentException("Previse grla!");
+            /* zivotinje.Clear();
+             lokacije.Clear();*/
+
+            /*for(int i = 0; i < brojGrla/25; i++)
             {
                 Lokacija lokacija = new Lokacija(new List<string>() { "Velika štala", "Seoski put", "12", 
                     "Sarajevo", "21000", "Bosna i Hercegovina" }, 25);
@@ -92,7 +94,33 @@ namespace ZivotinjskaFarma
                     for (int j = 0; j < brojGrla - i*25; j++)
                         zivotinje.Add(new Zivotinja(ZivotinjskaVrsta.Krava, DateTime.Parse("01/01/2021"), 5.2, 26.44, lokacija));
                 }
+            }*/
+            zivotinje.RemoveAll(z => z.Vrsta != ZivotinjskaVrsta.Magarac);
+            if (zivotinje.Count != 0)
+            {
+                Lokacija prebivalište = zivotinje[0].Prebivalište;
+                Lokacija staraStala = prebivalište;
+                lokacije.RemoveAll(l => !l.Equals(staraStala));
             }
+
+            else lokacije.Clear();
+            int brojTrenutnihZivotinja = zivotinje.Count();
+            int brojTrenutnihLokacija = lokacije.Count();
+            for (int i = 0; i < brojGrla/25; i++)
+                {
+                Lokacija lokacija = new Lokacija(new List<string>() { "Velika štala", "Seoski put", "12",
+                    "Sarajevo", "21000", "Bosna i Hercegovina" }, 25);
+                if(brojTrenutnihLokacija + i != brojGrla/25) lokacije.Add(lokacija);
+                    if(i != brojGrla/25 - 1)
+                    {
+                        for(int j = 0; j < 25; j++)
+                            zivotinje.Add(new Zivotinja(vrsta, DateTime.Parse("01/01/2021"), 40.1, 74.11, lokacija));
+                    } else
+                    {
+                        for (int j = 0; j < brojGrla - i*25 - brojTrenutnihZivotinja; j++)
+                            zivotinje.Add(new Zivotinja(vrsta, DateTime.Parse("01/01/2021"), 5.2, 26.44, lokacija));
+                    }
+             }
         }
 
         public bool KupovinaProizvoda(Proizvod p, DateTime rok, int količina)

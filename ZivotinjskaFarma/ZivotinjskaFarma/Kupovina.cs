@@ -55,10 +55,19 @@ namespace ZivotinjskaFarma
         /// potrebno je vratiti FALSE, a u suprotnom je potrebno vratiti TRUE.
         /// </summary>
         /// <returns></returns>
-        public bool VerificirajKupovinu()
+        public bool VerificirajKupovinu() //Senija Kaleta (18662)
         {
             //throw new NotImplementedException();
-            return true;
+            //return true;
+            if (kolicina > kupljeniProizvod.KoličinaNaStanju) return false;
+            if (((kupljeniProizvod.Vrsta.Equals("Mlijeko") || kupljeniProizvod.Vrsta.Equals("Jaja") ||
+                kupljeniProizvod.Vrsta.Equals("Sir")) && rokIsporuke <= datumKupovine.AddDays(7)) || 
+                (kupljeniProizvod.Vrsta.Equals("Vuna") && rokIsporuke <= datumKupovine.AddDays(30)))
+            {
+                return true;
+            }
+            else return false;
+
         }
 
         public static int DajSljedeciBroj()
