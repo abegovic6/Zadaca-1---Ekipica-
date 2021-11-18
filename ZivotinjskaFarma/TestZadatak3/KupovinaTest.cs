@@ -20,5 +20,25 @@ namespace TestZadatak3
             Assert.IsFalse(k.VerificirajKupovinu());
 
         }
+        [TestMethod]
+        public void VerificirajKupovinuTest1() //Eldar Panjeta (18711)
+        {
+            Lokacija l = new Lokacija(new List<string>()
+            { "Lokacija", "Zmaja od Bosne", "2", "Sarajevo", "71000", "Bosna i Hercegovina" }, 1000);
+            Zivotinja z = new Zivotinja(ZivotinjskaVrsta.Ovca, DateTime.Now.AddDays(-1), 5, 50, l);
+            Proizvod p = new Proizvod("Vuna", "opis", "Vuna", z, DateTime.Now.AddDays(-1), DateTime.Now.AddDays(60), 100);
+            Kupovina k = new Kupovina("2", DateTime.Now, DateTime.Now.AddDays(31), p, 1, true);
+            Assert.IsTrue(k.VerificirajKupovinu());
+        }
+        [TestMethod]
+        public void VerificirajKupovinuTest2() //Eldar Panjeta (18711)
+        {
+            Lokacija l = new Lokacija(new List<string>()
+            { "Lokacija", "Zmaja od Bosne", "2", "Sarajevo", "71000", "Bosna i Hercegovina" }, 1000);
+            Zivotinja z = new Zivotinja(ZivotinjskaVrsta.Ovca, DateTime.Now.AddDays(-1), 5, 50, l);
+            Proizvod p = new Proizvod("Vuna", "opis", "Vuna", z, DateTime.Now.AddDays(-1), DateTime.Now.AddDays(60), 100);
+            Kupovina k = new Kupovina("2", DateTime.Now, DateTime.Now.AddDays(31), p, 101, true);
+            Assert.IsFalse(k.VerificirajKupovinu());
+        }
     }
 }

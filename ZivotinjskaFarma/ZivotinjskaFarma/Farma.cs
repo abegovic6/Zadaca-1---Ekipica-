@@ -202,9 +202,35 @@ namespace ZivotinjskaFarma
         /// Ukoliko nije definisana nijedna lokacija, potrebno je vratiti iznos od 0 KM.
         /// </summary>
         /// <returns></returns>
-        public double ObračunajPorez()
+        public double ObračunajPorez() //Eldar Panjeta (18711)
         {
-            throw new NotImplementedException();
+            double porez = 0;
+            double osnovica = 10;
+
+            for(int i=0; i<Lokacije.Count; i++)
+            {
+                if (Lokacije[i].Površina > 10000)
+                {
+                    porez = porez + osnovica * 0.02;
+                    continue;
+                }
+
+                if(Lokacije[i].Površina >= 1000 && Lokacije[i].Površina <= 10000)
+                {
+                    if(Lokacije[i].Država == "Bosna i Hercegovina") porez = porez + osnovica * 0.015;
+                    else porez = porez + osnovica * 0.05;
+                    continue;
+                }
+
+                if(Lokacije[i].Površina < 1000)
+                {
+                    if(Lokacije[i].Grad == "Sarajevo" || Lokacije[i].Grad == "Banja Luka" ||
+                            Lokacije[i].Grad == "Tuzla" || Lokacije[i].Grad == "Mostar") porez = porez + osnovica * 0.01;
+                    else porez = porez + osnovica * 0.03;
+                    continue;
+                }
+            }
+            return porez;
         }
 
         #endregion
