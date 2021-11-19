@@ -32,7 +32,6 @@ namespace TestZadatak3
         }
 
         [TestMethod]
-       // [ExpectedException(typeof(InvalidOperationException))]
         public void TestSetterProizvodjac()
         {
             Zivotinja pomocna = new Zivotinja(ZivotinjskaVrsta.Krava, DateTime.Now.AddDays(-365), 10, 1.5, prebivaliste);
@@ -40,13 +39,104 @@ namespace TestZadatak3
             Assert.IsTrue(proizvod.Proizvođač.Vrsta == ZivotinjskaVrsta.Krava);
             pomocna.Vrsta = ZivotinjskaVrsta.Ovca;
             Assert.IsFalse(proizvod.Proizvođač.Vrsta == ZivotinjskaVrsta.Krava);
-            pomocna.Vrsta = ZivotinjskaVrsta.Magarac;
-            Assert.ThrowsException<InvalidOperationException>(() => { pomocna.Vrsta = ZivotinjskaVrsta.Patka;
+            //pomocna.Vrsta = ZivotinjskaVrsta.Magarac;
+            /*Assert.ThrowsException<InvalidOperationException>(() => { pomocna.Vrsta = ZivotinjskaVrsta.Patka;
+                proizvod.Proizvođač = pomocna;
+            }, "Odabrana životinja ne može proizvoditi željenu vrstu proizvoda!");*/
+
+            //Jaja
+            proizvod.Vrsta = "Jaja";
+            Assert.ThrowsException<InvalidOperationException>(() => { pomocna.Vrsta = ZivotinjskaVrsta.Krava;
+                proizvod.Proizvođač = pomocna;
+            }, "Odabrana životinja ne može proizvoditi željenu vrstu proizvoda!");
+
+            Assert.ThrowsException<InvalidOperationException>(() => {
+                pomocna.Vrsta = ZivotinjskaVrsta.Magarac;
+                proizvod.Proizvođač = pomocna;
+            }, "Odabrana životinja ne može proizvoditi željenu vrstu proizvoda!");
+
+            Assert.ThrowsException<InvalidOperationException>(() => {
+                pomocna.Vrsta = ZivotinjskaVrsta.Ovca;
+                proizvod.Proizvođač = pomocna;
+            }, "Odabrana životinja ne može proizvoditi željenu vrstu proizvoda!");
+
+            Assert.ThrowsException<InvalidOperationException>(() => {
+                pomocna.Vrsta = ZivotinjskaVrsta.Koza;
+                proizvod.Proizvođač = pomocna;
+            }, "Odabrana životinja ne može proizvoditi željenu vrstu proizvoda!");
+
+
+            //Proizvodjaci Vune
+            proizvod.Vrsta = "Vuna";
+            Assert.ThrowsException<InvalidOperationException>(() => {
+                pomocna.Vrsta = ZivotinjskaVrsta.Patka;
+                proizvod.Proizvođač = pomocna;
+            }, "Odabrana životinja ne može proizvoditi željenu vrstu proizvoda!");
+
+            Assert.ThrowsException<InvalidOperationException>(() => {
+                pomocna.Vrsta = ZivotinjskaVrsta.Kokoška;
+                proizvod.Proizvođač = pomocna;
+            }, "Odabrana životinja ne može proizvoditi željenu vrstu proizvoda!");
+
+            Assert.ThrowsException<InvalidOperationException>(() => {
+                pomocna.Vrsta = ZivotinjskaVrsta.Guska;
+                proizvod.Proizvođač = pomocna;
+            }, "Odabrana životinja ne može proizvoditi željenu vrstu proizvoda!");
+
+            Assert.ThrowsException<InvalidOperationException>(() => {
+                pomocna.Vrsta = ZivotinjskaVrsta.Krava;
+                proizvod.Proizvođač = pomocna;
+            }, "Odabrana životinja ne može proizvoditi željenu vrstu proizvoda!");
+
+            Assert.ThrowsException<InvalidOperationException>(() => {
+                pomocna.Vrsta = ZivotinjskaVrsta.Magarac;
+                proizvod.Proizvođač = pomocna;
+            }, "Odabrana životinja ne može proizvoditi željenu vrstu proizvoda!");
+
+            Assert.ThrowsException<InvalidOperationException>(() => {
+                pomocna.Vrsta = ZivotinjskaVrsta.Koza;
                 proizvod.Proizvođač = pomocna;
             }, "Odabrana životinja ne može proizvoditi željenu vrstu proizvoda!");
 
 
         }
+        [TestMethod]
+        public void TestSetterProizvodjac2()
+        {
+            //MLijeko po defaultu je ovdje
+            proizvod.Proizvođač.Vrsta = ZivotinjskaVrsta.Koza;
+            Assert.IsFalse(proizvod.Proizvođač.Vrsta == ZivotinjskaVrsta.Krava);
+
+            Assert.ThrowsException<InvalidOperationException>(() =>
+            {
+                proizvodjac.Vrsta = ZivotinjskaVrsta.Guska;
+                proizvod.Proizvođač = proizvodjac;
+            });
+
+            Assert.ThrowsException<InvalidOperationException>(() =>
+            {
+                proizvodjac.Vrsta = ZivotinjskaVrsta.Patka;
+                proizvod.Proizvođač = proizvodjac;
+            });
+
+            Assert.ThrowsException<InvalidOperationException>(() =>
+            {
+                proizvodjac.Vrsta = ZivotinjskaVrsta.Kokoška;
+                proizvod.Proizvođač = proizvodjac;
+            });
+
+            //Sir
+            proizvod.Vrsta = "Sir";
+            Assert.ThrowsException<InvalidOperationException>(() =>
+            {
+                proizvodjac.Vrsta = ZivotinjskaVrsta.Magarac;
+                proizvod.Proizvođač = proizvodjac;
+            });
+
+
+        }
+
+
 
     }
 }
