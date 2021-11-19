@@ -62,7 +62,7 @@ namespace ZivotinjskaFarma
             if (kolicina > kupljeniProizvod.KoličinaNaStanju) return false;
             if (((kupljeniProizvod.Vrsta.Equals("Mlijeko") || kupljeniProizvod.Vrsta.Equals("Jaja") ||
                 kupljeniProizvod.Vrsta.Equals("Sir")) && rokIsporuke <= datumKupovine.AddDays(7)) || 
-                (kupljeniProizvod.Vrsta.Equals("Vuna") && rokIsporuke <= datumKupovine.AddDays(30)))
+                (kupljeniProizvod.Vrsta.Equals("Vuna") && rokIsporuke >= datumKupovine.AddDays(30)))
             {
                 return true;
             }
