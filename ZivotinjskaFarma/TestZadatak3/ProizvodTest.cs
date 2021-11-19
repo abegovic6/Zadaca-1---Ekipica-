@@ -132,9 +132,33 @@ namespace TestZadatak3
                 proizvodjac.Vrsta = ZivotinjskaVrsta.Magarac;
                 proizvod.Proizvođač = proizvodjac;
             });
-
-
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void TestDatumProizvodnje()
+        {
+            proizvod.DatumProizvodnje = proizvod.DatumProizvodnje.AddDays(100);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void TestRokTRajanja()
+        {
+            //treba za getter test :))
+
+            proizvod.RokTrajanja = proizvod.DatumProizvodnje.AddDays(-100);
+        }
+        
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void TestKolicinaNaStanju()
+        {
+            proizvod.KoličinaNaStanju = 0;
+        }
+
+
+
 
 
 
