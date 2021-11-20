@@ -1,6 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using CsvHelper;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
 using ZivotinjskaFarma;
 
 namespace TestZadatak3
@@ -10,11 +14,66 @@ namespace TestZadatak3
     {
         static Lokacija lokacija;
 
+        static IEnumerable<object[]> LokacijeCSVNeispravne
+        {
+            get
+            {
+                return UčitajPodatkeCSV("podaciLokacijaNeispravni.csv");
+            }
+        }
+
+        static IEnumerable<object[]> LokacijeCSVIspravne
+        {
+            get
+            {
+                return UčitajPodatkeCSV("podaciLokacijaIspravni.csv");
+            }
+        }
+
+        public static IEnumerable<object[]> UčitajPodatkeCSV(string file)
+        {
+            using (var reader = new StreamReader(file))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                var rows = csv.GetRecords<dynamic>();
+                foreach (var row in rows)
+                {
+                    var values = ((IDictionary<String, Object>)row).Values;
+                    var elements = values.Select(elem => elem.ToString()).ToList();
+
+                    
+
+                    yield return new object[]
+                    {
+                        new List<string>(){ elements[0], elements[1], elements[2], elements[3], elements[4], elements[5]}, Double.Parse(elements[6]) 
+                    };
+                }
+            }
+        }
+
         [TestInitialize]
         public void Inizijaliziraj()
         {
             lokacija = new Lokacija(new List<string>()
             { "Lokacija", "Ulica", "2", "Sarajevo", "71000", "Bosna i Hercegovina" }, 100);
+        }
+
+        [TestMethod]
+        [DynamicData("LokacijeCSVNeispravne")]
+        public void TestKonstruktorCSVNeispravni(List<string> lista, double povrsina)
+        {
+            Assert.ThrowsException<ArgumentException>(() =>
+            {
+                Lokacija lokacija = new Lokacija(lista, povrsina);
+            });
+        }
+        [TestMethod]
+        [DynamicData("LokacijeCSVIspravne")]
+        public void TestKonstruktorCSVIspravni(List<string> lista, double povrsina)
+        {
+
+            Lokacija lokacija = new Lokacija(lista, povrsina);
+
         }
 
         //Kroz sve testove za settere se također testiraju i getteri
@@ -75,26 +134,9 @@ namespace TestZadatak3
             Assert.AreEqual(2000, lokacija.Površina);
             Assert.ThrowsException<ArgumentException>(() => lokacija.Površina = 0.0001, "Površina zemljišta mora biti barem 0.01 m2!");
         }
+       
         [TestMethod]
-        public void TestKonstruktor1()
-        {
-            Lokacija lokacija2;
-            Assert.ThrowsException<ArgumentException>(() => {
-                lokacija2 = new Lokacija(new List<string>()
-            { "Lokacija", "Ulica", "2", "Sarajevo", "71000", "Bosna i Hercegovina" }, 0.0001);
-            }, "Površina zemljišta mora biti barem 0.01 m2!");
-        }
-        [TestMethod]
-        public void TestKonstruktor2()
-        {
-            Lokacija lokacija2;
-            Assert.ThrowsException<ArgumentException>(() => {
-                lokacija2 = new Lokacija(new List<string>()
-            { "", "Ulica", "2", "Sarajevo", "71000", "Bosna i Hercegovina" }, 100);
-            }, "Nijedan podatak o lokaciji ne smije biti prazan!");
-        }
-        [TestMethod]
-        public void TestKonstruktor3()
+        public void TestKonstruktorNeispravanBrojParametara()
         {
             Lokacija lokacija2;
             Assert.ThrowsException<ArgumentException>(() => {
