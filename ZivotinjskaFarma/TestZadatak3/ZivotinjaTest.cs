@@ -106,7 +106,11 @@ namespace TestZadatak3
             zivotinja.PregledajZivotinju("sve ok", "sve ok", "1");
             zivotinja.ProvjeriStanjeZivotinje();
             Assert.IsFalse(zivotinja.Proizvođač);
-
+            zivotinja.PregledajZivotinju("sve ok", "sve ok", "4");
+            zivotinja.PregledajZivotinju("sve ok", "sve ok", "4.4");
+            zivotinja.PregledajZivotinju("sve ok", "sve ok", "4.6");
+            zivotinja.ProvjeriStanjeZivotinje();
+            Assert.IsTrue(zivotinja.Proizvođač);
         }
 
 

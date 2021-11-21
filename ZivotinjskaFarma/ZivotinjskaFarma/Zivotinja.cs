@@ -103,7 +103,7 @@ namespace ZivotinjskaFarma
                         if(substringZadnjegPregleda.StartsWith("OCJENA: "))
                         {
                             double ocjena = 0;
-                            if (!Double.TryParse(substringZadnjegPregleda.Substring(9), out ocjena))
+                            if (!Double.TryParse(substringZadnjegPregleda.Substring(8), out ocjena))
                             {
                                 throw new ArgumentOutOfRangeException("Unutar pregleda nije navedena ocjena!");
                             }
@@ -128,7 +128,7 @@ namespace ZivotinjskaFarma
                             if (substringZadnjegPregleda.StartsWith("OCJENA: "))
                             {
                                 double ocjena = 0;
-                                if(!Double.TryParse(substringZadnjegPregleda.Substring(9), out ocjena))
+                                if(!Double.TryParse(substringZadnjegPregleda.Substring(8), out ocjena))
                                 {
                                     throw new Exception("Unutar pregleda nije navedena ocjena!");
                                 }
@@ -140,6 +140,7 @@ namespace ZivotinjskaFarma
                     {
                         proizvođač = false;
                     }
+                    //else proizvođač = true;
                 }
 
             }
