@@ -105,7 +105,7 @@ namespace ZivotinjskaFarma
                             double ocjena = 0;
                             if (!Double.TryParse(substringZadnjegPregleda.Substring(9), out ocjena))
                             {
-                                throw new Exception("Unutar pregleda nije navedena ocjena!");
+                                throw new ArgumentOutOfRangeException("Unutar pregleda nije navedena ocjena!");
                             }
                             if (!(ocjena > 3.5))
                             {

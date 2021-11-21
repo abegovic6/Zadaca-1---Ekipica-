@@ -69,7 +69,7 @@ namespace TestZadatak3
             Assert.IsTrue(z.Proizvođač);
         }
         [TestMethod]
-        public void ProvjeriStanjeZivotinjeTest3() 
+        public void ProvjeriStanjeZivotinjeTest3()
         {
             DateTime dt = new DateTime(2013, 1, 1);
             Lokacija l = new Lokacija(new List<string>()
@@ -79,5 +79,36 @@ namespace TestZadatak3
             z.ProvjeriStanjeZivotinje();
             Assert.IsFalse(z.Proizvođač);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void ProvjeriStanjeZivotinjeTest4() //Senija Kaleta (18662)
+        {
+            Lokacija lokacija = new Lokacija(new List<string>()
+            { "Lokacija", "Zmaja od Bosne", "2", "Sarajevo", "71000", "Bosna i Hercegovina" }, 1000);
+            Zivotinja zivotinja = new Zivotinja(ZivotinjskaVrsta.Magarac, DateTime.Parse("01/01/2011"), 70, 1.5, lokacija);
+            zivotinja.PregledajZivotinju("", "", "");
+            zivotinja.ProvjeriStanjeZivotinje();
+
+        }
+
+        [TestMethod]
+        public void ProvjeriStanjeZivotinjeTest5() //Senija Kaleta (18662)
+        {
+            Lokacija lokacija = new Lokacija(new List<string>()
+            { "Lokacija", "Zmaja od Bosne", "2", "Sarajevo", "71000", "Bosna i Hercegovina" }, 1000);
+            Zivotinja zivotinja = new Zivotinja(ZivotinjskaVrsta.Magarac, DateTime.Parse("01/01/2019"), 70, 1.5, lokacija);
+            zivotinja.PregledajZivotinju("sve ok", "sve ok", "5");
+            zivotinja.PregledajZivotinju("sve ok", "sve ok", "5");
+            zivotinja.PregledajZivotinju("sve ok", "sve ok", "3");
+            zivotinja.PregledajZivotinju("sve ok", "sve ok", "1");
+            zivotinja.PregledajZivotinju("sve ok", "sve ok", "1");
+            zivotinja.PregledajZivotinju("sve ok", "sve ok", "1");
+            zivotinja.ProvjeriStanjeZivotinje();
+            Assert.IsFalse(zivotinja.Proizvođač);
+
+        }
+
+
     }
 }
