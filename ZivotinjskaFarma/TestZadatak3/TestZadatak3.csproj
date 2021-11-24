@@ -19,6 +19,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="podaciKupovineIspravni.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="podaciKupovineNeispravni.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="podaciLokacijaNeispravni.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

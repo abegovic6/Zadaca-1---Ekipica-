@@ -60,16 +60,18 @@ namespace ZivotinjskaFarma
             //throw new NotImplementedException();
             //return true;
             if (kolicina > kupljeniProizvod.KoličinaNaStanju) return false;
-            if (kupljeniProizvod.Vrsta.Equals("Mlijeko") || kupljeniProizvod.Vrsta.Equals("Jaja") || kupljeniProizvod.Vrsta.Equals("Sir"))
+            if (kupljeniProizvod.Vrsta.Equals("Mlijeko") || kupljeniProizvod.Vrsta.Equals("Jaja") || 
+                kupljeniProizvod.Vrsta.Equals("Sir"))
             {
-                if (rokIsporuke < DatumKupovine.AddDays(2) || rokIsporuke > DatumKupovine.AddDays(8)) return false;
+                if (rokIsporuke < DatumKupovine.AddDays(2) || rokIsporuke > DatumKupovine.AddDays(7)) return false;
                 else return true;
             }
-            if(kupljeniProizvod.Vrsta.Equals("Vuna") && rokIsporuke < datumKupovine.AddDays(30))
+            if(kupljeniProizvod.Vrsta.Equals("Vuna") && rokIsporuke < datumKupovine.AddDays(31))
             {
-                return false;
+                return true;
             }
-            else return true;
+            
+            return true;
 
         }
 

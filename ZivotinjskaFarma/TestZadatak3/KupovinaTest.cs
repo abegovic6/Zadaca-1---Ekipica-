@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Xml;
 using ZivotinjskaFarma;
 
 namespace TestZadatak3
@@ -8,11 +9,57 @@ namespace TestZadatak3
     [TestClass]
     public class KupovinaTest
     {
-
         static Lokacija lokacija;
         static Zivotinja zivotinja;
-        static Proizvod proizvod;
         static int broj;
+        static Proizvod proizvod;
+
+
+        public static IEnumerable<object[]> UčitajIspravnePodatkeXML()
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load("podaciKupovineIspravni.xml");
+            foreach (XmlNode node in doc.DocumentElement.ChildNodes)
+            {
+                List<string> elements = new List<string>();
+                foreach (XmlNode innerNode in node)
+                {
+                    elements.Add(innerNode.InnerText);
+                }
+                yield return new object[] { elements[0], elements[1], elements[2], elements[3] };
+            }
+        }
+
+        static IEnumerable<object[]> IspravneKupovineXML
+        {
+            get
+            {
+                return UčitajIspravnePodatkeXML();
+            }
+        }
+
+        public static IEnumerable<object[]> UčitajNeispravnePodatkeXML()
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load("podaciKupovineNeispravni.xml");
+            foreach (XmlNode node in doc.DocumentElement.ChildNodes)
+            {
+                List<string> elements = new List<string>();
+                foreach (XmlNode innerNode in node)
+                {
+                    elements.Add(innerNode.InnerText);
+                }
+                yield return new object[] { elements[0], elements[1], elements[2], elements[3] };
+            }
+        }
+
+        static IEnumerable<object[]> NeispravneKupovineXML
+        {
+            get
+            {
+                return UčitajNeispravnePodatkeXML();
+            }
+        }
 
         [TestInitialize]
         public void Inizijaliziraj()
@@ -24,25 +71,39 @@ namespace TestZadatak3
         }
 
         [TestMethod]
-        public void Vertest()
+        [DynamicData("IspravneKupovineXML")]
+        public void VerificirajKupovinuTestKupovineIspravne(string vrstazivotinje, 
+            string vrstaproizvoda, string datumkupovine, string rokisporuke) // Begović Amila (18608)
         {
-            Lokacija l = new Lokacija(new List<string>()
-            { "Lokacija", "Ulica", "2", "Sarajevo", "71000", "Bosna i Hercegovina" }, 100);
-            Zivotinja z1 = new Zivotinja(ZivotinjskaVrsta.Patka, DateTime.Now.AddDays(-1), 5, 50, l);
-            Proizvod p = new Proizvod("ime", "opis", "vrsta", z1, DateTime.Now.AddDays(-1), DateTime.Now, 10);
-            Kupovina k = new Kupovina("1", DateTime.Now, DateTime.Now, p, 5, true);
-
-            Assert.IsFalse(k.VerificirajKupovinu());
-
+            Zivotinja z = new Zivotinja((ZivotinjskaVrsta)Enum.Parse(typeof(ZivotinjskaVrsta), vrstazivotinje),
+                DateTime.Now.AddDays(-1), 5, 50, lokacija);
+            Proizvod p = new("ime", "opis", vrstaproizvoda, z, 
+                DateTime.Now.AddDays(-1), DateTime.Now.AddDays(60), 100);
+            Kupovina k = new("2", DateTime.Parse(datumkupovine), DateTime.Parse(rokisporuke), p, 1, true);
+            Assert.IsTrue(k.VerificirajKupovinu());
         }
+
         [TestMethod]
-        public void VerificirajKupovinuTest1() 
+        [DynamicData("NeispravneKupovineXML")]
+        public void VerificirajKupovinuTestKupovineNeispravne(string vrstazivotinje,
+            string vrstaproizvoda, string datumkupovine, string rokisporuke) // Begović Amila (18608)
+        {
+            Zivotinja z = new Zivotinja((ZivotinjskaVrsta)Enum.Parse(typeof(ZivotinjskaVrsta), vrstazivotinje),
+                DateTime.Now.AddDays(-1), 5, 50, lokacija);
+            Proizvod p = new("ime", "opis", vrstaproizvoda, z,
+                DateTime.Now.AddDays(-1), DateTime.Now.AddDays(60), 100);
+            Kupovina k = new("2", DateTime.Parse(datumkupovine), DateTime.Parse(rokisporuke), p, 1, true);
+            Assert.IsFalse(k.VerificirajKupovinu());
+        }
+
+        [TestMethod]
+        public void VerificirajKupovinuTest1()
         {
             Kupovina k = new Kupovina("2", DateTime.Now, DateTime.Now.AddDays(31), proizvod, 1, true);
             Assert.IsTrue(k.VerificirajKupovinu());
         }
         [TestMethod]
-        public void VerificirajKupovinuTest2() 
+        public void VerificirajKupovinuTest2()
         {
             Kupovina k = new Kupovina("2", DateTime.Now, DateTime.Now.AddDays(31), proizvod, 101, true);
             Assert.IsFalse(k.VerificirajKupovinu());
