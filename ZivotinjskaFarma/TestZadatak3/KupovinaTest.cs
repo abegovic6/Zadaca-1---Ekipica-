@@ -72,14 +72,14 @@ namespace TestZadatak3
 
         [TestMethod]
         [DynamicData("IspravneKupovineXML")]
-        public void VerificirajKupovinuTestKupovineIspravne(string vrstazivotinje, 
+        public void VerificirajKupovinuTestKupovineIspravne(string vrstazivotinje,
             string vrstaproizvoda, string datumkupovine, string rokisporuke)      // Begović Amila (18608)
         {
             Zivotinja z = new Zivotinja((ZivotinjskaVrsta)Enum.Parse(typeof(ZivotinjskaVrsta), vrstazivotinje),
                 DateTime.Now.AddDays(-1), 5, 50, lokacija);
-            Proizvod p = new("ime", "opis", vrstaproizvoda, z, 
+            Proizvod p = new("ime", "opis", vrstaproizvoda, z,
                 DateTime.Now.AddDays(-1), DateTime.Now.AddDays(60), 100);
-            Kupovina k = new("2", DateTime.Parse(datumkupovine), DateTime.Parse(rokisporuke), p, 1, true);
+            Kupovina k = new("2", DateTime.ParseExact(datumkupovine, "dd/MM/yyyy", null), DateTime.ParseExact(rokisporuke, "dd/MM/yyyy", null), p, 1, true);
             Assert.IsTrue(k.VerificirajKupovinu());
         }
 
@@ -92,19 +92,19 @@ namespace TestZadatak3
                 DateTime.Now.AddDays(-1), 5, 50, lokacija);
             Proizvod p = new("ime", "opis", vrstaproizvoda, z,
                 DateTime.Now.AddDays(-1), DateTime.Now.AddDays(60), 100);
-            Kupovina k = new("2", DateTime.Parse(datumkupovine), DateTime.Parse(rokisporuke), p, 1, true);
+            Kupovina k = new("2", DateTime.ParseExact(datumkupovine, "dd/MM/yyyy", null), DateTime.ParseExact(rokisporuke, "dd/MM/yyyy", null), p, 1, true);
             Assert.IsFalse(k.VerificirajKupovinu());
         }
 
         [TestMethod]
-        public void VerificirajKupovinuTest1()
+        public void VerificirajKupovinuTest1() //Eldar Panjeta (18711)
         {
             Kupovina k = new Kupovina("2", DateTime.Now, DateTime.Now.AddDays(30), proizvod, 1, true);
             Assert.IsTrue(k.VerificirajKupovinu());
         }
 
         [TestMethod]
-        public void VerificirajKupovinuTest2()
+        public void VerificirajKupovinuTest2() //Eldar Panjeta (18711)
         {
             Kupovina k = new Kupovina("2", DateTime.Now, DateTime.Now.AddDays(30), proizvod, 101, true);
             Assert.IsFalse(k.VerificirajKupovinu());
@@ -119,11 +119,7 @@ namespace TestZadatak3
             Assert.AreEqual("1", k.IDKupca1);
         }
 
-        [TestMethod]
-        public void TestBrojac()
-        {
-            Kupovina k = new Kupovina("2", DateTime.Now, DateTime.Now.AddDays(31), proizvod, 1, true);
-            Assert.AreEqual(1, Kupovina.DajSljedeciBroj());
-        }
+
+
     }
 }

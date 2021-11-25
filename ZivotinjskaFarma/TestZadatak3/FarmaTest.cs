@@ -218,7 +218,7 @@ namespace TestZadatak3
 
                     yield return new object[]
                     {
-                        DateTime.Parse(elements[0])
+                        DateTime.ParseExact(elements[0], "dd/MM/yyyy", null)
                     };
                 }
             }

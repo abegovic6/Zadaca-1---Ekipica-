@@ -31,6 +31,9 @@
     <None Update="podaciLokacijaIspravni.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="podaciLokacijeZaFarmuNeispravne.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="podaciPraznikIspravni.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -15,12 +15,6 @@
 	<Kupovina>
 		<VrstaZivotinje>Krava</VrstaZivotinje>
 		<VrstaProizvoda>Mlijeko</VrstaProizvoda>
-		<DatumKupovine>31/01/2021</DatumKupovine>
-		<RokProdaje>03/02/2021</RokProdaje>
-	</Kupovina>
-	<Kupovina>
-		<VrstaZivotinje>Krava</VrstaZivotinje>
-		<VrstaProizvoda>Mlijeko</VrstaProizvoda>
 		<DatumKupovine>01/01/2021</DatumKupovine>
 		<RokProdaje>08/01/2021</RokProdaje>
 	</Kupovina>
