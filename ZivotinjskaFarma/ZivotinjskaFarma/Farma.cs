@@ -213,17 +213,14 @@ namespace ZivotinjskaFarma
                 {
                     porez = porez + osnovica * 0.02;
                     continue;
-                }
+                } else
 
                 if(Lokacije[i].Površina >= 1000 && Lokacije[i].Površina <= 10000)
                 {
                     if(Lokacije[i].Država == "Bosna i Hercegovina") porez = porez + osnovica * 0.015;
                     else porez = porez + osnovica * 0.05;
                     continue;
-                }
-
-                if(Lokacije[i].Površina < 1000)
-                {
+                } else {
                     if(Lokacije[i].Grad == "Sarajevo" || Lokacije[i].Grad == "Banja Luka" ||
                             Lokacije[i].Grad == "Tuzla" || Lokacije[i].Grad == "Mostar") porez = porez + osnovica * 0.01;
                     else porez = porez + osnovica * 0.03;

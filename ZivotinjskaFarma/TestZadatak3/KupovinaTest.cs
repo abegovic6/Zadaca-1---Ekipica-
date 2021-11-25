@@ -73,7 +73,7 @@ namespace TestZadatak3
         [TestMethod]
         [DynamicData("IspravneKupovineXML")]
         public void VerificirajKupovinuTestKupovineIspravne(string vrstazivotinje, 
-            string vrstaproizvoda, string datumkupovine, string rokisporuke) // Begović Amila (18608)
+            string vrstaproizvoda, string datumkupovine, string rokisporuke)      // Begović Amila (18608)
         {
             Zivotinja z = new Zivotinja((ZivotinjskaVrsta)Enum.Parse(typeof(ZivotinjskaVrsta), vrstazivotinje),
                 DateTime.Now.AddDays(-1), 5, 50, lokacija);
@@ -86,7 +86,7 @@ namespace TestZadatak3
         [TestMethod]
         [DynamicData("NeispravneKupovineXML")]
         public void VerificirajKupovinuTestKupovineNeispravne(string vrstazivotinje,
-            string vrstaproizvoda, string datumkupovine, string rokisporuke) // Begović Amila (18608)
+            string vrstaproizvoda, string datumkupovine, string rokisporuke)         // Begović Amila (18608)
         {
             Zivotinja z = new Zivotinja((ZivotinjskaVrsta)Enum.Parse(typeof(ZivotinjskaVrsta), vrstazivotinje),
                 DateTime.Now.AddDays(-1), 5, 50, lokacija);
@@ -99,15 +99,17 @@ namespace TestZadatak3
         [TestMethod]
         public void VerificirajKupovinuTest1()
         {
-            Kupovina k = new Kupovina("2", DateTime.Now, DateTime.Now.AddDays(31), proizvod, 1, true);
+            Kupovina k = new Kupovina("2", DateTime.Now, DateTime.Now.AddDays(30), proizvod, 1, true);
             Assert.IsTrue(k.VerificirajKupovinu());
         }
+
         [TestMethod]
         public void VerificirajKupovinuTest2()
         {
-            Kupovina k = new Kupovina("2", DateTime.Now, DateTime.Now.AddDays(31), proizvod, 101, true);
+            Kupovina k = new Kupovina("2", DateTime.Now, DateTime.Now.AddDays(30), proizvod, 101, true);
             Assert.IsFalse(k.VerificirajKupovinu());
         }
+
         [TestMethod]
         public void TestIdKupca()
         {
