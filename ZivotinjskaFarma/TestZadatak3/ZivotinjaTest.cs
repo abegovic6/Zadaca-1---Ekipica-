@@ -75,21 +75,21 @@ namespace TestZadatak3
             Lokacija l = new Lokacija(new List<string>()
             { "Lokacija", "Zmaja od Bosne", "2", "Sarajevo", "71000", "Bosna i Hercegovina" }, 1000);
             Zivotinja z = new Zivotinja(ZivotinjskaVrsta.Krava, dt, 500, 2, l);
-            z.PregledajZivotinju("Krava", "Losa", "3.1");
+            z.PregledajZivotinju("Krava", "Losa", "3,1");
             z.ProvjeriStanjeZivotinje();
             Assert.IsFalse(z.Proizvođač);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [ExpectedException(typeof(FormatException))]
         public void ProvjeriStanjeZivotinjeTest4() //Senija Kaleta (18662)
         {
             Lokacija lokacija = new Lokacija(new List<string>()
             { "Lokacija", "Zmaja od Bosne", "2", "Sarajevo", "71000", "Bosna i Hercegovina" }, 1000);
-            Zivotinja zivotinja = new Zivotinja(ZivotinjskaVrsta.Magarac, DateTime.Parse("01/01/2011"), 70, 1.5, lokacija);
+            Zivotinja zivotinja = new Zivotinja(ZivotinjskaVrsta.Magarac, DateTime.Parse("01/01/2012"), 70, 1.5, lokacija);
             zivotinja.PregledajZivotinju("", "", "");
             zivotinja.ProvjeriStanjeZivotinje();
-
+            Assert.IsFalse(zivotinja.Proizvođač);
         }
 
         [TestMethod]
@@ -106,9 +106,10 @@ namespace TestZadatak3
             zivotinja.PregledajZivotinju("sve ok", "sve ok", "1");
             zivotinja.ProvjeriStanjeZivotinje();
             Assert.IsFalse(zivotinja.Proizvođač);
+            zivotinja.Proizvođač = true;
             zivotinja.PregledajZivotinju("sve ok", "sve ok", "4");
-            zivotinja.PregledajZivotinju("sve ok", "sve ok", "4.4");
-            zivotinja.PregledajZivotinju("sve ok", "sve ok", "4.6");
+            zivotinja.PregledajZivotinju("sve ok", "sve ok", "4,4");
+            zivotinja.PregledajZivotinju("sve ok", "sve ok", "4,6");
             zivotinja.ProvjeriStanjeZivotinje();
             Assert.IsTrue(zivotinja.Proizvođač);
         }

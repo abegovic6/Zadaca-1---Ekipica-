@@ -87,7 +87,7 @@ namespace ZivotinjskaFarma
         /// </summary>
         public void ProvjeriStanjeZivotinje() // implementirala metodu: Begović Amila
         {
-            int godinaStarosti = (int)((DateTime.Now - starost).TotalDays / 365.242199);
+            double godinaStarosti = (double)((DateTime.Now - starost).TotalDays / 365.242199);
             if(godinaStarosti > 10)
             {
                 proizvođač = false;
@@ -102,15 +102,13 @@ namespace ZivotinjskaFarma
                         string substringZadnjegPregleda = zadnjiPregled.Substring(i);
                         if(substringZadnjegPregleda.StartsWith("OCJENA: "))
                         {
-                            double ocjena = 0;
-                            if (!Double.TryParse(substringZadnjegPregleda.Substring(8), out ocjena))
-                            {
-                                throw new ArgumentOutOfRangeException("Unutar pregleda nije navedena ocjena!");
-                            }
-                            if (!(ocjena > 3.5))
+                        
+
+                            if (Double.Parse(substringZadnjegPregleda.Substring(8)) < 3.5)
                             {
                                 proizvođač = false;
                             }
+                            break;
                         }
                     }
                 }
@@ -124,23 +122,22 @@ namespace ZivotinjskaFarma
                         string zadnjiPregled = pregledi[pregledi.Count - 1 - i];
                         for (int j = 0; j < zadnjiPregled.Length; j++)
                         {
+
                             string substringZadnjegPregleda = zadnjiPregled.Substring(j);
+
                             if (substringZadnjegPregleda.StartsWith("OCJENA: "))
                             {
-                                double ocjena = 0;
-                                if(!Double.TryParse(substringZadnjegPregleda.Substring(8), out ocjena))
-                                {
-                                    throw new Exception("Unutar pregleda nije navedena ocjena!");
-                                }
-                                suma += ocjena;
+                                suma += Double.Parse(substringZadnjegPregleda.Substring(8));
+                                break;
                             }
                         }
                     }
+
                     if (!(suma / 3 > 4))
                     {
                         proizvođač = false;
                     }
-                    //else proizvođač = true;
+                    
                 }
 
             }
