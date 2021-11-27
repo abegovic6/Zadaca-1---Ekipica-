@@ -45,7 +45,7 @@ namespace TestZadatak3
 
                     yield return new object[]
                     {
-                        new List<string>(){ elements[0], elements[1], elements[2], elements[3], elements[4], elements[5]}, Double.Parse(elements[6]) 
+                        new List<string>(){ elements[0], elements[1], elements[2], elements[3], elements[4], elements[5]}, Double.Parse(elements[6], CultureInfo.InvariantCulture) 
                     };
                 }
             }
