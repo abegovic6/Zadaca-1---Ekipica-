@@ -28,14 +28,8 @@ namespace Zadatak_2
 
             //Veterinar veterinar = new Veterinar();
             Spy veterinar = new Spy();
-            veterinar.Opcija = 0;
             f.ObaviVeterinarskiPregled(veterinar);
             Assert.AreEqual(f.Zivotinje[0].Proizvođač, true);
-
-            z2.Proizvođač = false;
-            z3.Proizvođač = false;
-            veterinar.Opcija = 1;
-            f.ObaviVeterinarskiPregled(veterinar);
             Assert.AreEqual(f.Zivotinje[1].Pregledi.Count, 1);
             Assert.AreEqual(f.Zivotinje[2].Proizvođač, false);
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace ZivotinjskaFarma
 {
@@ -104,7 +105,7 @@ namespace ZivotinjskaFarma
                         {
                         
 
-                            if (Double.Parse(substringZadnjegPregleda.Substring(8)) < 3.5)
+                            if (Double.Parse(substringZadnjegPregleda.Substring(8), CultureInfo.InvariantCulture) < 3.5)
                             {
                                 proizvođač = false;
                             }
@@ -127,7 +128,7 @@ namespace ZivotinjskaFarma
 
                             if (substringZadnjegPregleda.StartsWith("OCJENA: "))
                             {
-                                suma += Double.Parse(substringZadnjegPregleda.Substring(8));
+                                suma += Double.Parse(substringZadnjegPregleda.Substring(8), CultureInfo.InvariantCulture);
                                 break;
                             }
                         }

@@ -75,7 +75,7 @@ namespace TestZadatak3
             Lokacija l = new Lokacija(new List<string>()
             { "Lokacija", "Zmaja od Bosne", "2", "Sarajevo", "71000", "Bosna i Hercegovina" }, 1000);
             Zivotinja z = new Zivotinja(ZivotinjskaVrsta.Krava, dt, 500, 2, l);
-            z.PregledajZivotinju("Krava", "Losa", "2,5");
+            z.PregledajZivotinju("Krava", "Losa", "2.5");
             z.ProvjeriStanjeZivotinje();
             Assert.IsFalse(z.Proizvođač);
         }
@@ -108,8 +108,8 @@ namespace TestZadatak3
             Assert.IsFalse(zivotinja.Proizvođač);
             zivotinja.Proizvođač = true;
             zivotinja.PregledajZivotinju("sve ok", "sve ok", "4");
-            zivotinja.PregledajZivotinju("sve ok", "sve ok", "4,4");
-            zivotinja.PregledajZivotinju("sve ok", "sve ok", "4,6");
+            zivotinja.PregledajZivotinju("sve ok", "sve ok", "4.4");
+            zivotinja.PregledajZivotinju("sve ok", "sve ok", "4.6");
             zivotinja.ProvjeriStanjeZivotinje();
             Assert.IsTrue(zivotinja.Proizvođač);
         }

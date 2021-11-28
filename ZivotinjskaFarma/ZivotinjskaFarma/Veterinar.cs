@@ -24,7 +24,7 @@ namespace ZivotinjskaFarma
        public int Opcija { get; set; }
         public double ocjenaZdravstvenogStanjaZivotinje(Zivotinja zivotinja)
         {
-            if (Opcija == 0) return 6;
+            if (zivotinja.Vrsta == ZivotinjskaVrsta.Patka) return 6;
             return 4;
         }
     }
