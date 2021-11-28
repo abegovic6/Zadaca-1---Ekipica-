@@ -12,7 +12,7 @@ namespace TestZadatak3
         static Zivotinja patka;
         static Lokacija lokacija;
         static Veterinar veterinar;
-        static Mock mock;
+        static Spy spy;
 
         [TestInitialize]
         public void Inizijaliziraj()
@@ -22,7 +22,7 @@ namespace TestZadatak3
             ovca = new Zivotinja(ZivotinjskaVrsta.Ovca, DateTime.Now.AddDays(-1), 5, 50, lokacija);
             patka = new Zivotinja(ZivotinjskaVrsta.Patka, DateTime.Now.AddDays(-1), 5, 50, lokacija);
             veterinar = new Veterinar();
-            mock = new Mock();
+            spy = new Spy();
 
         }
         [TestMethod]
@@ -35,8 +35,10 @@ namespace TestZadatak3
         [TestMethod]
         public void TestOcjenaZdravstvenogStanja2()
         {
-            Assert.AreEqual(4, mock.ocjenaZdravstvenogStanjaZivotinje(ovca));
-            Assert.AreEqual(6, mock.ocjenaZdravstvenogStanjaZivotinje(patka));
+            spy.Opcija = 1;
+            Assert.AreEqual(4, spy.ocjenaZdravstvenogStanjaZivotinje(ovca));
+            spy.Opcija = 0;
+            Assert.AreEqual(6, spy.ocjenaZdravstvenogStanjaZivotinje(patka));
         }
 
     }

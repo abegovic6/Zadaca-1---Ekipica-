@@ -19,11 +19,12 @@ namespace ZivotinjskaFarma
         }
     }
 
-    public class Mock : IVeterinar
+    public class Spy : IVeterinar
     {
+       public int Opcija { get; set; }
         public double ocjenaZdravstvenogStanjaZivotinje(Zivotinja zivotinja)
         {
-            if (zivotinja.Vrsta == ZivotinjskaVrsta.Patka) return 6;
+            if (Opcija == 0) return 6;
             return 4;
         }
     }
