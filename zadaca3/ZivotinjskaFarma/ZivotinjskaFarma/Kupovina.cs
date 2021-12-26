@@ -46,33 +46,11 @@ namespace ZivotinjskaFarma
 
         #region Metode
 
-        /// <summary>
-        /// Metoda u okviru koje se verificira ispravnost kupovine.
-        /// Tražena količina ne može biti veća od količine proizvoda koja je na stanju.
-        /// Za mlijeko, jaja i sir je moguć rok isporuke od 2 do 7 dana od dana kupovine.
-        /// Za vunu je moguć rok isporuke od najmanje 30 dana od dana kupovine.
-        /// Ukoliko se kupovina ne može izvršiti zbog jednog od razloga navedenih iznad, 
-        /// potrebno je vratiti FALSE, a u suprotnom je potrebno vratiti TRUE.
-        /// </summary>
-        /// <returns></returns>
-        public bool VerificirajKupovinu() //Senija Kaleta (18662)
+        public bool VerificirajKupovinu()
         {
-            //throw new NotImplementedException();
-            //return true;
-            if (kolicina > kupljeniProizvod.KoličinaNaStanju) return false;
-            else if (kupljeniProizvod.Vrsta.Equals("Mlijeko") || kupljeniProizvod.Vrsta.Equals("Jaja") || 
-                kupljeniProizvod.Vrsta.Equals("Sir"))
-            {
-                if ((rokIsporuke - DatumKupovine).TotalDays < 2 || (rokIsporuke - DatumKupovine).TotalDays > 7) return false;
-                else return true;
-            } else
-            if(kupljeniProizvod.Vrsta.Equals("Vuna") && (rokIsporuke - DatumKupovine).TotalDays < 31)
-            {
-                return true;
-            } else
-            
-            return false;
-
+            if (kolicina > 50)
+                return false;
+            return true;
         }
 
         public static int DajSljedeciBroj()
