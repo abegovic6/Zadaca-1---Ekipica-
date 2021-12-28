@@ -137,6 +137,44 @@ namespace ZivotinjskaFarma
             }
         }
 
+        public bool KupovinaProizvodaRefactoring(Proizvod p, DateTime rok, int količina)
+        {
+            DateTime danas = DateTime.Now;
+            bool popust = Praznik(danas);
+            int id = Kupovina.DajSljedeciBroj();
+            Kupovina kupovina = new Kupovina(id.ToString(), danas, rok, p, količina, popust);
+            if (!kupovina.VerificirajKupovinu())
+                return false;
+
+            Kupovina postojecaKupovina = null;
+            for (int i = 0; i < kupovine.Count; i++)
+            {
+               if (provjeraKupovine(kupovine[i], kupovina)){
+
+                   postojecaKupovina = kupovine[i];
+                   break;
+               }     
+            }
+
+            return validnaKupovina(postojecaKupovina, kupovina);
+        }
+
+        private bool provjeraKupovine(Kupovina kupovina1, Kupovina kupovina2)
+        {
+            return kupovina1.DatumKupovine == kupovina2.DatumKupovine && kupovina1.IDKupca1 == kupovina2.IDKupca1
+                         && kupovina1.KupljeniProizvod == kupovina2.KupljeniProizvod;
+        }
+
+        private bool validnaKupovina(Kupovina postojecaKupovina, Kupovina kupovina)
+        {
+            if (postojecaKupovina == null) {
+                kupovine.Add(kupovina);
+                return true;
+            }
+
+            return false;
+        }
+
         public void BrisanjeKupovine(Kupovina kupovina)
         {
             if (kupovine.Contains(kupovina))
