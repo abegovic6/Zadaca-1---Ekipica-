@@ -131,6 +131,37 @@ namespace ZivotinjskaFarma
             Država = parametri.ElementAt(i);
         }
 
+        public void LokacijaKonstruktorRefactoring(List<string> parametri, double površina)
+        {
+            provjeriIspravnost(parametri, površina);
+
+            Površina = površina;
+            Naziv = parametri.ElementAt(0);
+            Adresa = parametri.ElementAt(1);
+
+            int i = 2;
+            if (parametri.Count == 6)
+            {
+                BrojUlice = Int32.Parse(parametri.ElementAt(i));
+                i++;
+            }
+            Grad = parametri.ElementAt(i);
+            i++;
+            PoštanskiBroj = Int32.Parse(parametri.ElementAt(i));
+            i++;
+            Država = parametri.ElementAt(i);
+        }
+
+        public void provjeriIspravnost(List<string> parametri, double površina)
+        {
+            if (površina < 0.01)
+                throw new ArgumentException("Površina zemljišta mora biti barem 0.01 m2!");
+            else if (parametri.Any(p => p.Length < 1))
+                throw new ArgumentException("Nijedan podatak o lokaciji ne smije biti prazan!");
+            else if (parametri.Count != 5)
+                throw new ArgumentException("Neispravan broj parametara!");
+        }
+
         #endregion
     }
 }
