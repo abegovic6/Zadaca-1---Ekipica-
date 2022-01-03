@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ZivotinjskaFarma;
 
 namespace TestniProjekat
 {
@@ -8,6 +9,7 @@ namespace TestniProjekat
         [TestMethod]
         public void TestMethod1()
         {
+            Farma farma = new Farma();
         }
     }
 }
