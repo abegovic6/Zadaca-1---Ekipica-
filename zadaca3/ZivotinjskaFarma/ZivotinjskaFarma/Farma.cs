@@ -141,6 +141,46 @@ namespace ZivotinjskaFarma
                 return;
         }
 
+
+
+        public void RadSaZivotinjamaRefactoring(string opcija, Zivotinja zivotinja, int maxStarost)
+        {
+            if (zivotinje.Count > 0)
+            {
+                Zivotinja postojeca = zivotinje.FirstOrDefault
+                     (z => z.ID1 == zivotinja.ID1 && maxStarost * 365 > z.Starost.Year);
+
+                if (opcija == "Dodavanje")
+                    if (postojeca == null)
+                        zivotinje.Add(zivotinja);
+                    else
+                        throw new ArgumentException("Životinja je već registrovana u bazi!");
+                else if(postojeca == null)
+                {
+                    throw new ArgumentException("Životinja nije registrovana u bazi!");
+                }
+                else if (opcija == "Izmjena")
+                    if (postojeca != null)
+                    {
+                        var index = zivotinje.IndexOf(postojeca);
+                        zivotinje.RemoveAt(index);
+                        zivotinje.Add(zivotinja);
+                    }                       
+
+                else if (opcija == "Brisanje")
+                    if (postojeca != null)
+                        zivotinje.Remove(postojeca);
+
+                else
+                    throw new ArgumentException("Životinja je već registrovana u bazi!");
+
+            }
+
+            else
+                return;
+        }
+
+
         public void DodavanjeNoveLokacije(Lokacija lokacija)
         {
             if (lokacije.Any(l => l.Grad == lokacija.Grad && l.Adresa == lokacija.Adresa
