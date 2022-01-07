@@ -21,14 +21,13 @@ namespace TestniProjekat
                             farma.Zivotinje.Add(zivotinja1);
                         }
 
+            
             int x = 1;
 
-            farma.RadSaZivotinjamaRefactoring("Dodavanje", zivotinja, 2000);
+            farma.RadSaZivotinjamaCodeTunning("Dodavanje", zivotinja, 2000);
             
             int y = 1;
 
-
-            
 
 
             Assert.IsTrue(farma.Zivotinje.Count == 20500001);

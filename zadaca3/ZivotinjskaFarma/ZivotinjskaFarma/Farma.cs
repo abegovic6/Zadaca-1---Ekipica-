@@ -112,25 +112,20 @@ namespace ZivotinjskaFarma
                         zivotinje.Add(zivotinja);
                     else
                         throw new ArgumentException("Životinja je već registrovana u bazi!");
+                else if(postojeca == null)
+                {
+                    throw new ArgumentException("Životinja nije registrovana u bazi!");
+                }
 
                 else if (opcija == "Izmjena")
-                    if (postojeca != null)
                     {
                         var index = zivotinje.IndexOf(postojeca);
                         zivotinje.RemoveAt(index);
                         zivotinje.Add(zivotinja);
                     }
-                    else
-                        throw new ArgumentException("Životinja nije registrovana u bazi!");
 
                 else if (opcija == "Brisanje")
-                    if (postojeca != null)
                         zivotinje.Remove(postojeca);
-                    else
-                        throw new ArgumentException("Životinja nije registrovana u bazi!");
-
-                else if (postojeca == null)
-                    throw new ArgumentException("Životinja nije registrovana u bazi!");
 
                 else
                     throw new ArgumentException("Životinja je već registrovana u bazi!");
