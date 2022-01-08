@@ -8,7 +8,7 @@ namespace TestniProjekat
     [TestClass]
     public class CodeTunningTest
     {
-        [TestMethod]
+        /*[TestMethod]
         public void TestMethodForCodeTunning()
         {
             Farma farma = new Farma();
@@ -31,7 +31,7 @@ namespace TestniProjekat
 
 
             Assert.IsTrue(farma.Zivotinje.Count == 20500001);
-        }
+        }*/
 
        
     }
