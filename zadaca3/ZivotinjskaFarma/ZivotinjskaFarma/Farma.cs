@@ -96,10 +96,14 @@ namespace ZivotinjskaFarma
             if (zivotinje.Count > 0)
             {
                 Zivotinja postojeca = null;
-                
+
+                int maxStarostDani = 0;
+                for (int i = 0; i < 365; i++)
+                    maxStarostDani += maxStarost;
+
                 foreach (Zivotinja z in zivotinje)
                 {
-                    if (z.ID1 == zivotinja.ID1 && maxStarost * 365 > z.Starost.Year)
+                    if (z.ID1 == zivotinja.ID1 && maxStarostDani > z.Starost.Year)
                     {
                         postojeca = z;
                         break;
